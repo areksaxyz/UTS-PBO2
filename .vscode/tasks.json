@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build UTS PBO2 App (JDK Direct)",
+      "type": "shell",
+      "command": "scripts\\build.bat",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$javac"]
+    },
+    {
+      "label": "Run UTS PBO2 App (JDK Direct)",
+      "type": "shell",
+      "command": "scripts\\run.bat",
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run UTS PBO2 App",
+      "type": "shell",
+      "command": "mvn",
+      "args": ["exec:java"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build UTS PBO2 App",
+      "type": "shell",
+      "command": "mvn",
+      "args": ["clean", "package"],
+      "group": "build",
+      "problemMatcher": ["$javac"]
+    }
+  ]
+}
