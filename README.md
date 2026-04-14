@@ -63,8 +63,9 @@
 *Akses: Admin*
 
 ### Modul Ganti Password
-*Akses: Admin (semua akun), (./screenshots/08-gantipassword
-.png) Operator (akun sendiri saja)*
+![Ganti Password](./screenshots/08-gantipassword.png)
+
+*Akses: Admin (semua akun), Operator (akun sendiri saja)*
 
 ### Transaksi KRS
 ![KRS Transaction](./screenshots/04-krs-transaksi.png)
