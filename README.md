@@ -497,7 +497,7 @@ matakuliah_semester_8=8
 
 Untuk laporan bug atau saran fitur, silakan buat issue atau hubungi tim development.
 
-Kontak: `6281818266692`
+Kontak: [Chat WhatsApp](https://wa.me/6281818266692)
 
 ---
 
