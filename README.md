@@ -99,7 +99,7 @@
 Diagram berikut menunjukkan semua use case dalam sistem SIAKAD dan interaksi antara aktor (Admin/Operator) dengan sistem:
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'background': '#000000', 'lineColor': '#E5E7EB', 'primaryTextColor': '#F9FAFB', 'secondaryTextColor': '#F9FAFB', 'tertiaryTextColor': '#F9FAFB' }}}%%
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#000000', 'lineColor': '#FFFFFF', 'textColor': '#FFFFFF', 'primaryColor': '#000000', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#FFFFFF', 'secondaryColor': '#000000', 'secondaryTextColor': '#FFFFFF', 'secondaryBorderColor': '#FFFFFF', 'tertiaryColor': '#000000', 'tertiaryTextColor': '#FFFFFF', 'tertiaryBorderColor': '#FFFFFF', 'clusterBkg': '#000000', 'clusterBorder': '#FFFFFF', 'edgeLabelBackground': '#000000' }}}%%
 graph TB
     subgraph SIAKAD["🏫 SIAKAD System"]
         Login["🔐 Login"]
@@ -148,13 +148,10 @@ graph TB
     ChangePassword -->|Update| System
     Logout -->|End Session| System
     
-    classDef actor fill:#e1f5ff,stroke:#01579b,stroke-width:2px
-    classDef usecase fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    classDef system fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    style SIAKAD fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+    classDef bw fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
     
-    class Admin,Operator actor
-    class Login,MgMahasiswa,MgDosen,MgMataKuliah,MgUser,InputKRS,InputNilai,ViewReport,ChangePassword,Logout usecase
-    class System system
+    class Admin,Operator,System,Login,MgMahasiswa,MgDosen,MgMataKuliah,MgUser,InputKRS,InputNilai,ViewReport,ChangePassword,Logout bw
 ```
 
 **Penjelasan:**
@@ -169,6 +166,7 @@ graph TB
 Diagram berikut menunjukkan alur lengkap dari saat aplikasi dijalankan hingga ditutup:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#000000', 'lineColor': '#FFFFFF', 'textColor': '#FFFFFF', 'primaryColor': '#000000', 'primaryTextColor': '#FFFFFF', 'primaryBorderColor': '#FFFFFF', 'secondaryColor': '#000000', 'secondaryTextColor': '#FFFFFF', 'secondaryBorderColor': '#FFFFFF', 'tertiaryColor': '#000000', 'tertiaryTextColor': '#FFFFFF', 'tertiaryBorderColor': '#FFFFFF', 'edgeLabelBackground': '#000000' }}}%%
 graph TD
     Start([🟢 Mulai Aplikasi]) --> LaunchApp["Launch SIAKAD App"]
     LaunchApp --> CheckDB{"Database Terhubung?"}
@@ -228,12 +226,12 @@ graph TD
     ClearSession --> CloseCon["🔌 Close Database Connection"]
     CloseCon --> End([🔴 Aplikasi Ditutup])
     
-    style Start fill:#90EE90,stroke:#228B22,stroke-width:3px
-    style End fill:#FFB6C6,stroke:#DC143C,stroke-width:3px
-    style AdminMenu fill:#E3F2FD,stroke:#1976D2,stroke-width:2px
-    style OpMenu fill:#FFF3E0,stroke:#F57C00,stroke-width:2px
-    style DBUpdate fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px
-    style ErrMsg fill:#FFEBEE,stroke:#C62828,stroke-width:2px
+    style Start fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+    style End fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+    style AdminMenu fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+    style OpMenu fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+    style DBUpdate fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
+    style ErrMsg fill:#000000,stroke:#FFFFFF,stroke-width:2px,color:#FFFFFF
 ```
 
 **Alur Utama:**
@@ -253,6 +251,7 @@ graph TD
 Diagram berikut menunjukkan interaksi detail antara **Admin** dan **Operator** saat melakukan transaksi KRS:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#000000', 'lineColor': '#FFFFFF', 'textColor': '#FFFFFF', 'primaryTextColor': '#FFFFFF', 'secondaryTextColor': '#FFFFFF', 'tertiaryTextColor': '#FFFFFF', 'actorBkg': '#000000', 'actorBorder': '#FFFFFF', 'actorTextColor': '#FFFFFF', 'actorLineColor': '#FFFFFF', 'signalColor': '#FFFFFF', 'signalTextColor': '#FFFFFF', 'labelBoxBkgColor': '#000000', 'labelBoxBorderColor': '#FFFFFF', 'labelTextColor': '#FFFFFF', 'noteBkgColor': '#000000', 'noteBorderColor': '#FFFFFF', 'noteTextColor': '#FFFFFF', 'activationBkgColor': '#000000', 'activationBorderColor': '#FFFFFF' }}}%%
 sequenceDiagram
     actor Admin as 👨‍💼 Admin
     actor Operator as 👤 Operator
@@ -267,7 +266,7 @@ sequenceDiagram
     Service -->> UI: ◀️ List mahasiswa
     UI -->> Operator: ◀️ Tampilkan form
     
-    rect rgb(230, 245, 250)
+    rect rgb(20, 20, 20)
         Note over Operator,UI: Operator: Pilih Mahasiswa & Paket KRS
         Operator ->> UI: 4. Pilih mahasiswa + semester
         UI ->> Service: 5. Ambil mata kuliah semester {N}
@@ -277,7 +276,7 @@ sequenceDiagram
         UI -->> Operator: ◀️ Preview KRS
     end
     
-    rect rgb(245, 235, 220)
+    rect rgb(20, 20, 20)
         Note over Operator,DB: Operator: Validasi & Simpan KRS
         Operator ->> UI: 7. Klik "Simpan KRS"
         UI ->> Service: 8. Validate data (SKS, kapasitas, dll)
@@ -296,7 +295,7 @@ sequenceDiagram
         end
     end
     
-    rect rgb(245, 230, 245)
+    rect rgb(20, 20, 20)
         Note over Admin,DB: Admin: Review & Approval
         Admin ->> UI: 12. View pending KRS
         UI ->> Service: 13. Get KRS awaiting approval
@@ -324,10 +323,8 @@ sequenceDiagram
 | **12-17** | 👨‍💼 **Admin** | Review & Approval: lihat KRS pending, review, approve/reject, update status ACC |
 | **18** | 👤 **Operator** | Kembali ke dashboard setelah selesai |
 
-**Warna Box:**
-- 🔵 **Biru Muda** = Aksi Operator (Input data)
-- 🟤 **Coklat Muda** = Operator (Validasi & Simpan)
-- 🟣 **Ungu Muda** = Aksi Admin (Review & Approval)
+**Catatan Tampilan:**
+- Diagram diset **monokrom hitam-putih** agar kontras di tema gelap.
 
 ---
 
