@@ -1,4 +1,4 @@
-﻿# 📚 SIAKAD - Sistem Informasi Akademik Desktop
+# 📚 SIAKAD - Sistem Informasi Akademik Desktop
 
 **Aplikasi Manajemen Akademik Terintegrasi Berbasis Java Swing**
 
@@ -63,7 +63,8 @@
 *Akses: Admin*
 
 ### Modul Ganti Password
-*Akses: Admin (semua akun), Operator (akun sendiri saja)*
+*Akses: Admin (semua akun), (./screenshots/08-gantipassword
+.png) Operator (akun sendiri saja)*
 
 ### Transaksi KRS
 ![KRS Transaction](./screenshots/04-krs-transaksi.png)
