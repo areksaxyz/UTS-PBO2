@@ -323,9 +323,6 @@ sequenceDiagram
 | **12-17** | 👨‍💼 **Admin** | Review & Approval: lihat KRS pending, review, approve/reject, update status ACC |
 | **18** | 👤 **Operator** | Kembali ke dashboard setelah selesai |
 
-**Catatan Tampilan:**
-- Diagram diset **monokrom hitam-putih** agar kontras di tema gelap.
-
 ---
 
 ## 🏗️ Arsitektur Sistem
