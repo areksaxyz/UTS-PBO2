@@ -1,4 +1,4 @@
-﻿# ðŸ“š SIAKAD - Sistem Informasi Akademik Desktop
+﻿# 📚 SIAKAD - Sistem Informasi Akademik Desktop
 
 **Aplikasi Manajemen Akademik Terintegrasi Berbasis Java Swing**
 
@@ -37,8 +37,6 @@
 
 ## Screenshot Aplikasi
 
-> Status saat ini: screenshot untuk **Master Dosen**, **Master Mata Kuliah**, dan **Ganti Password** belum tersedia di folder `screenshots/`.
-
 ### Layar Login
 ![Login Screen](./screenshots/01-login-screen.png)
 
@@ -55,18 +53,16 @@
 *Akses: Admin*
 
 ### Modul Master Dosen
-`Target file: ./screenshots/06-dosen-master.png`
+![Dosen Master](./screenshots/06-dosen-master.png)
 
 *Akses: Admin*
 
 ### Modul Master Mata Kuliah
-`Target file: ./screenshots/07-matakuliah-master.png`
+![Mata Kuliah Master](./screenshots/07-matakuliah-master.png)
 
 *Akses: Admin*
 
 ### Modul Ganti Password
-`Target file: ./screenshots/08-ganti-password.png`
-
 *Akses: Admin (semua akun), Operator (akun sendiri saja)*
 
 ### Transaksi KRS
@@ -96,28 +92,29 @@
 
 ## Use Case & Alur Kerja Aplikasi
 
-### ðŸ“‹ Use Case Diagram
+### 📋 Use Case Diagram
 
 Diagram berikut menunjukkan semua use case dalam sistem SIAKAD dan interaksi antara aktor (Admin/Operator) dengan sistem:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#000000', 'lineColor': '#E5E7EB', 'primaryTextColor': '#F9FAFB', 'secondaryTextColor': '#F9FAFB', 'tertiaryTextColor': '#F9FAFB' }}}%%
 graph TB
-    subgraph SIAKAD["ðŸ« SIAKAD System"]
-        Login["ðŸ” Login"]
-        MgMahasiswa["ðŸ‘¥ Manage Mahasiswa"]
-        MgDosen["ðŸ‘¨â€ðŸ« Manage Dosen"]
-        MgMataKuliah["ðŸ“š Manage Mata Kuliah"]
-        MgUser["âš™ï¸ Manage User"]
-        InputKRS["ðŸ“ Input KRS"]
-        InputNilai["ðŸŽ“ Input Nilai"]
-        ViewReport["ðŸ“Š View Report/IP IPK"]
-        ChangePassword["ðŸ”‘ Change Password"]
-        Logout["ðŸ‘‹ Logout"]
+    subgraph SIAKAD["🏫 SIAKAD System"]
+        Login["🔐 Login"]
+        MgMahasiswa["👥 Manage Mahasiswa"]
+        MgDosen["👨‍🏫 Manage Dosen"]
+        MgMataKuliah["📚 Manage Mata Kuliah"]
+        MgUser["⚙️ Manage User"]
+        InputKRS["📝 Input KRS"]
+        InputNilai["🎓 Input Nilai"]
+        ViewReport["📊 View Report/IP IPK"]
+        ChangePassword["🔑 Change Password"]
+        Logout["👋 Logout"]
     end
     
-    Admin["ðŸ‘¤ Admin"]
-    Operator["ðŸ‘¥ Operator"]
-    System["âš™ï¸ Database System"]
+    Admin["👤 Admin"]
+    Operator["👥 Operator"]
+    System["⚙️ Database System"]
     
     Admin -->|Can Do| Login
     Operator -->|Can Do| Login
@@ -159,51 +156,51 @@ graph TB
 ```
 
 **Penjelasan:**
-- ðŸ‘¤ **Admin**: Akses penuh ke semua modul master data
-- ðŸ‘¥ **Operator**: Akses terbatas ke transaksi KRS dan Nilai saja
-- âš™ï¸ **Database System**: Backend yang menyimpan dan mengelola data
+- 👤 **Admin**: Akses penuh ke semua modul master data
+- 👥 **Operator**: Akses terbatas ke transaksi KRS dan Nilai saja
+- ⚙️ **Database System**: Backend yang menyimpan dan mengelola data
 
 ---
 
-### ðŸ”€ Activity Flow Diagram
+### 🔀 Activity Flow Diagram
 
 Diagram berikut menunjukkan alur lengkap dari saat aplikasi dijalankan hingga ditutup:
 
 ```mermaid
 graph TD
-    Start([ðŸŸ¢ Mulai Aplikasi]) --> LaunchApp["Launch SIAKAD App"]
+    Start([🟢 Mulai Aplikasi]) --> LaunchApp["Launch SIAKAD App"]
     LaunchApp --> CheckDB{"Database Terhubung?"}
     
-    CheckDB -->|âŒ Tidak| CreateDB["ðŸ“¦ Create Database & Tables"]
-    CreateDB --> InsertSeed["ðŸŒ± Insert Seed Data"]
+    CheckDB -->|❌ Tidak| CreateDB["📦 Create Database & Tables"]
+    CreateDB --> InsertSeed["🌱 Insert Seed Data"]
     InsertSeed --> ShowLogin["Tampilkan Login Form"]
     
-    CheckDB -->|âœ… Ya| ShowLogin
+    CheckDB -->|✅ Ya| ShowLogin
     
-    ShowLogin --> EnterCred["ðŸ‘¤ Input Username & Password"]
+    ShowLogin --> EnterCred["👤 Input Username & Password"]
     EnterCred --> ValidateLogin{"Login Valid?"}
     
-    ValidateLogin -->|âŒ Gagal| ErrMsg["âŒ Tampilkan Error"]
+    ValidateLogin -->|❌ Gagal| ErrMsg["❌ Tampilkan Error"]
     ErrMsg --> EnterCred
     
-    ValidateLogin -->|âœ… Sukses| CheckRole{"Cek Role?"}
+    ValidateLogin -->|✅ Sukses| CheckRole{"Cek Role?"}
     
-    CheckRole -->|Admin| AdminMenu["ðŸ“Š Admin Dashboard"]
-    CheckRole -->|Operator| OpMenu["ðŸ“‹ Operator Dashboard"]
+    CheckRole -->|Admin| AdminMenu["📊 Admin Dashboard"]
+    CheckRole -->|Operator| OpMenu["📋 Operator Dashboard"]
     
     AdminMenu --> AdminChoice{"Pilih Modul?"}
-    AdminChoice -->|Master Mahasiswa| MhsAdmin["âž• Lihat/Tambah/Ubah/Hapus Mahasiswa"]
-    AdminChoice -->|Master Dosen| DosenAdmin["âž• Lihat/Tambah/Ubah/Hapus Dosen"]
-    AdminChoice -->|Master Mata Kuliah| MKAdmin["âž• Lihat/Tambah/Ubah/Hapus Mata Kuliah"]
-    AdminChoice -->|Setting User| UserAdmin["âž• Tambah User Baru"]
-    AdminChoice -->|Ganti Password| PwdAdmin["ðŸ”‘ Ubah Password"]
-    AdminChoice -->|Logout| Logout["ðŸ‘‹ Logout"]
+    AdminChoice -->|Master Mahasiswa| MhsAdmin["➕ Lihat/Tambah/Ubah/Hapus Mahasiswa"]
+    AdminChoice -->|Master Dosen| DosenAdmin["➕ Lihat/Tambah/Ubah/Hapus Dosen"]
+    AdminChoice -->|Master Mata Kuliah| MKAdmin["➕ Lihat/Tambah/Ubah/Hapus Mata Kuliah"]
+    AdminChoice -->|Setting User| UserAdmin["➕ Tambah User Baru"]
+    AdminChoice -->|Ganti Password| PwdAdmin["🔑 Ubah Password"]
+    AdminChoice -->|Logout| Logout["👋 Logout"]
     
     OpMenu --> OpChoice{"Pilih Modul?"}
-    OpChoice -->|Transaksi KRS| KrsOp["ðŸ“ Input/Edit KRS"]
-    OpChoice -->|Transaksi Nilai| NilaiOp["ðŸŽ“ Input/Edit Nilai"]
-    OpChoice -->|View Report| ReportOp["ðŸ“Š Cek IP/IPK"]
-    OpChoice -->|Ganti Password| PwdOp["ðŸ”‘ Ubah Password"]
+    OpChoice -->|Transaksi KRS| KrsOp["📝 Input/Edit KRS"]
+    OpChoice -->|Transaksi Nilai| NilaiOp["🎓 Input/Edit Nilai"]
+    OpChoice -->|View Report| ReportOp["📊 Cek IP/IPK"]
+    OpChoice -->|Ganti Password| PwdOp["🔑 Ubah Password"]
     OpChoice -->|Logout| Logout
     
     MhsAdmin --> SaveCheck{"Simpan Perubahan?"}
@@ -216,18 +213,18 @@ graph TD
     PwdAdmin --> BackMenu
     PwdOp --> BackMenu
     
-    SaveCheck -->|âœ… Ya| DBUpdate["ðŸ’¾ Update Database"]
-    SaveCheck -->|âŒ Tidak| AdminMenu
-    SaveCheck -->|âŒ Tidak| OpMenu
+    SaveCheck -->|✅ Ya| DBUpdate["💾 Update Database"]
+    SaveCheck -->|❌ Tidak| AdminMenu
+    SaveCheck -->|❌ Tidak| OpMenu
     
     DBUpdate --> BackMenu
-    BackMenu -->|âœ… Ya| AdminMenu
-    BackMenu -->|âœ… Ya| OpMenu
-    BackMenu -->|âŒ Tidak| Logout
+    BackMenu -->|✅ Ya| AdminMenu
+    BackMenu -->|✅ Ya| OpMenu
+    BackMenu -->|❌ Tidak| Logout
     
-    Logout --> ClearSession["ðŸ—‘ï¸ Clear Session"]
-    ClearSession --> CloseCon["ðŸ”Œ Close Database Connection"]
-    CloseCon --> End([ðŸ”´ Aplikasi Ditutup])
+    Logout --> ClearSession["🗑️ Clear Session"]
+    ClearSession --> CloseCon["🔌 Close Database Connection"]
+    CloseCon --> End([🔴 Aplikasi Ditutup])
     
     style Start fill:#90EE90,stroke:#228B22,stroke-width:3px
     style End fill:#FFB6C6,stroke:#DC143C,stroke-width:3px
@@ -238,44 +235,44 @@ graph TD
 ```
 
 **Alur Utama:**
-1. ðŸŸ¢ **Launch**: Aplikasi dimulai dan check koneksi database
-2. ðŸ“¦ **Setup**: Jika database belum ada, sistem auto-create dengan seed data
-3. ðŸ” **Login**: User memasukkan credentials
-4. âœ… **Validasi**: Sistem validasi login dan cek role
-5. ðŸ“Š **Dashboard**: Menampilkan menu sesuai role (Admin/Operator)
-6. ðŸ”„ **Operasi**: User memilih modul dan melakukan CRUD/Transaksi
-7. ðŸ’¾ **Simpan**: Perubahan disimpan ke database
-8. ðŸ‘‹ **Logout**: Session berakhir dan koneksi ditutup
+1. 🟢 **Launch**: Aplikasi dimulai dan check koneksi database
+2. 📦 **Setup**: Jika database belum ada, sistem auto-create dengan seed data
+3. 🔐 **Login**: User memasukkan credentials
+4. ✅ **Validasi**: Sistem validasi login dan cek role
+5. 📊 **Dashboard**: Menampilkan menu sesuai role (Admin/Operator)
+6. 🔄 **Operasi**: User memilih modul dan melakukan CRUD/Transaksi
+7. 💾 **Simpan**: Perubahan disimpan ke database
+8. 👋 **Logout**: Session berakhir dan koneksi ditutup
 
 ---
 
-### ðŸ”— Sequence Diagram - Transaksi KRS (Admin & Operator)
+### 🔗 Sequence Diagram - Transaksi KRS (Admin & Operator)
 
 Diagram berikut menunjukkan interaksi detail antara **Admin** dan **Operator** saat melakukan transaksi KRS:
 
 ```mermaid
 sequenceDiagram
-    actor Admin as ðŸ‘¨â€ðŸ’¼ Admin
-    actor Operator as ðŸ‘¤ Operator
-    participant UI as ðŸ–¥ï¸ KRS Panel
-    participant Service as ðŸ“‹ LayananAkademik
-    participant DB as ðŸ’¾ Database
+    actor Admin as 👨‍💼 Admin
+    actor Operator as 👤 Operator
+    participant UI as 🖥️ KRS Panel
+    participant Service as 📋 LayananAkademik
+    participant DB as 💾 Database
     
     Operator ->> UI: 1. Buka Input KRS
     UI ->> Service: 2. Ambil daftar mahasiswa
     Service ->> DB: 3. Query mahasiswa
-    DB -->> Service: â—€ï¸ Data mahasiswa
-    Service -->> UI: â—€ï¸ List mahasiswa
-    UI -->> Operator: â—€ï¸ Tampilkan form
+    DB -->> Service: ◀️ Data mahasiswa
+    Service -->> UI: ◀️ List mahasiswa
+    UI -->> Operator: ◀️ Tampilkan form
     
     rect rgb(230, 245, 250)
         Note over Operator,UI: Operator: Pilih Mahasiswa & Paket KRS
         Operator ->> UI: 4. Pilih mahasiswa + semester
         UI ->> Service: 5. Ambil mata kuliah semester {N}
         Service ->> DB: 6. Query mk by semester
-        DB -->> Service: â—€ï¸ 8 mata kuliah
-        Service -->> UI: â—€ï¸ Daftar mata kuliah
-        UI -->> Operator: â—€ï¸ Preview KRS
+        DB -->> Service: ◀️ 8 mata kuliah
+        Service -->> UI: ◀️ Daftar mata kuliah
+        UI -->> Operator: ◀️ Preview KRS
     end
     
     rect rgb(245, 235, 220)
@@ -283,17 +280,17 @@ sequenceDiagram
         Operator ->> UI: 7. Klik "Simpan KRS"
         UI ->> Service: 8. Validate data (SKS, kapasitas, dll)
         Service ->> DB: 9. Check existing KRS
-        DB -->> Service: â—€ï¸ Check result
+        DB -->> Service: ◀️ Check result
         alt Validasi Gagal
-            Service -->> UI: âŒ Error message
-            UI -->> Operator: â—€ï¸ Tampilkan error
+            Service -->> UI: ❌ Error message
+            UI -->> Operator: ◀️ Tampilkan error
         else Validasi Sukses
             Service ->> DB: 10. Insert KRS records
-            DB -->> Service: âœ… Success
+            DB -->> Service: ✅ Success
             Service ->> DB: 11. Calculate IP otomatis
-            DB -->> Service: âœ… IP updated
-            Service -->> UI: âœ… Simpan berhasil
-            UI -->> Operator: â—€ï¸ Refresh list
+            DB -->> Service: ✅ IP updated
+            Service -->> UI: ✅ Simpan berhasil
+            UI -->> Operator: ◀️ Refresh list
         end
     end
     
@@ -302,161 +299,161 @@ sequenceDiagram
         Admin ->> UI: 12. View pending KRS
         UI ->> Service: 13. Get KRS awaiting approval
         Service ->> DB: 14. Query KRS status
-        DB -->> Service: â—€ï¸ List KRS pending
-        Service -->> UI: â—€ï¸ Display KRS
-        UI -->> Admin: â—€ï¸ Tampilkan KRS untuk approval
+        DB -->> Service: ◀️ List KRS pending
+        Service -->> UI: ◀️ Display KRS
+        UI -->> Admin: ◀️ Tampilkan KRS untuk approval
         Admin ->> UI: 15. Approve/Reject KRS
         UI ->> Service: 16. Update status KRS
         Service ->> DB: 17. Update ACC field
-        DB -->> Service: âœ… Updated
-        Service -->> UI: âœ… Status updated
-        UI -->> Admin: â—€ï¸ Confirmation
+        DB -->> Service: ✅ Updated
+        Service -->> UI: ✅ Status updated
+        UI -->> Admin: ◀️ Confirmation
     end
     
     Operator ->> UI: 18. Kembali ke menu
-    UI -->> Operator: â—€ï¸ Back to Operator Dashboard
+    UI -->> Operator: ◀️ Back to Operator Dashboard
 ```
 
 **Penjelasan Alur:**
 
 | # | Actor | Deskripsi |
 |---|-------|-----------|
-| **1-11** | ðŸ‘¤ **Operator** | Input KRS: pilih mahasiswa, ambil MK per semester, validasi, simpan ke DB |
-| **12-17** | ðŸ‘¨â€ðŸ’¼ **Admin** | Review & Approval: lihat KRS pending, review, approve/reject, update status ACC |
-| **18** | ðŸ‘¤ **Operator** | Kembali ke dashboard setelah selesai |
+| **1-11** | 👤 **Operator** | Input KRS: pilih mahasiswa, ambil MK per semester, validasi, simpan ke DB |
+| **12-17** | 👨‍💼 **Admin** | Review & Approval: lihat KRS pending, review, approve/reject, update status ACC |
+| **18** | 👤 **Operator** | Kembali ke dashboard setelah selesai |
 
 **Warna Box:**
-- ðŸ”µ **Biru Muda** = Aksi Operator (Input data)
-- ðŸŸ¤ **Coklat Muda** = Operator (Validasi & Simpan)
-- ðŸŸ£ **Ungu Muda** = Aksi Admin (Review & Approval)
+- 🔵 **Biru Muda** = Aksi Operator (Input data)
+- 🟤 **Coklat Muda** = Operator (Validasi & Simpan)
+- 🟣 **Ungu Muda** = Aksi Admin (Review & Approval)
 
 ---
 
-## ðŸ—ï¸ Arsitektur Sistem
+## 🏗️ Arsitektur Sistem
 
 ### Struktur Folder
 
 ```
 UTS_PBO2/
-â”œâ”€â”€ src/main/java/id/ac/utb/pbo2/
-â”‚   â”œâ”€â”€ Aplikasi.java                    # Entry point aplikasi
-â”‚   â”œâ”€â”€ DatabaseCheck.java               # Validasi database
-â”‚   â”œâ”€â”€ config/
-â”‚   â”‚   â””â”€â”€ AppConfig.java               # Konfigurasi aplikasi
-â”‚   â”œâ”€â”€ db/
-â”‚   â”‚   â”œâ”€â”€ BasisData.java               # Koneksi database
-â”‚   â”‚   â””â”€â”€ DatabaseBootstrap.java       # Inisialisasi database
-â”‚   â”œâ”€â”€ model/
-â”‚   â”‚   â””â”€â”€ PenggunaSaatIni.java         # Model user session
-â”‚   â”œâ”€â”€ service/
-â”‚   â”‚   â”œâ”€â”€ LayananAkademik.java         # Business logic akademik
-â”‚   â”‚   â””â”€â”€ LayananOtentikasi.java       # Autentikasi & validasi
-â”‚   â”œâ”€â”€ ui/
-â”‚   â”‚   â”œâ”€â”€ LoginFrame.java              # Form login
-â”‚   â”‚   â”œâ”€â”€ MainFrame.java               # Window utama
-â”‚   â”‚   â”œâ”€â”€ DashboardPanel.java          # Dashboard awal
-â”‚   â”‚   â”œâ”€â”€ MahasiswaPanel.java          # Master mahasiswa
-â”‚   â”‚   â”œâ”€â”€ DosenPanel.java              # Master dosen
-â”‚   â”‚   â”œâ”€â”€ MataKuliahPanel.java         # Master mata kuliah
-â”‚   â”‚   â”œâ”€â”€ UserPanel.java               # Setting user
-â”‚   â”‚   â”œâ”€â”€ KrsPanel.java                # Transaksi KRS
-â”‚   â”‚   â”œâ”€â”€ NilaiPanel.java              # Transaksi nilai
-â”‚   â”‚   â”œâ”€â”€ PasswordPanel.java           # Ubah password
-â”‚   â”‚   â”œâ”€â”€ DatePickerField.java         # Custom date picker
-â”‚   â”‚   â”œâ”€â”€ YearPickerField.java         # Custom year picker
-â”‚   â”‚   â”œâ”€â”€ StudentListPanel.java        # List view mahasiswa
-â”‚   â”‚   â””â”€â”€ Theme.java                   # UI theme & styling
-â”‚   â””â”€â”€ util/
-â”‚       â””â”€â”€ PasswordUtil.java            # Utility enkrip password
-â”œâ”€â”€ database/
-â”‚   â”œâ”€â”€ uts_pbo2.sql                     # Schema & seed data
-â”‚   â””â”€â”€ wilayah_indonesia.sql            # Data wilayah (optional)
-â”œâ”€â”€ scripts/
-â”‚   â”œâ”€â”€ build.bat                        # Build script
-â”‚   â””â”€â”€ run.bat                          # Run script
-â”œâ”€â”€ lib/
-â”‚   â””â”€â”€ mysql-connector-j-8.4.0.jar      # JDBC driver
-â”œâ”€â”€ pom.xml                              # Maven configuration
-â””â”€â”€ README.md                            # Dokumentasi ini
+├── src/main/java/id/ac/utb/pbo2/
+│   ├── Aplikasi.java                    # Entry point aplikasi
+│   ├── DatabaseCheck.java               # Validasi database
+│   ├── config/
+│   │   └── AppConfig.java               # Konfigurasi aplikasi
+│   ├── db/
+│   │   ├── BasisData.java               # Koneksi database
+│   │   └── DatabaseBootstrap.java       # Inisialisasi database
+│   ├── model/
+│   │   └── PenggunaSaatIni.java         # Model user session
+│   ├── service/
+│   │   ├── LayananAkademik.java         # Business logic akademik
+│   │   └── LayananOtentikasi.java       # Autentikasi & validasi
+│   ├── ui/
+│   │   ├── LoginFrame.java              # Form login
+│   │   ├── MainFrame.java               # Window utama
+│   │   ├── DashboardPanel.java          # Dashboard awal
+│   │   ├── MahasiswaPanel.java          # Master mahasiswa
+│   │   ├── DosenPanel.java              # Master dosen
+│   │   ├── MataKuliahPanel.java         # Master mata kuliah
+│   │   ├── UserPanel.java               # Setting user
+│   │   ├── KrsPanel.java                # Transaksi KRS
+│   │   ├── NilaiPanel.java              # Transaksi nilai
+│   │   ├── PasswordPanel.java           # Ubah password
+│   │   ├── DatePickerField.java         # Custom date picker
+│   │   ├── YearPickerField.java         # Custom year picker
+│   │   ├── StudentListPanel.java        # List view mahasiswa
+│   │   └── Theme.java                   # UI theme & styling
+│   └── util/
+│       └── PasswordUtil.java            # Utility enkrip password
+├── database/
+│   ├── uts_pbo2.sql                     # Schema & seed data
+│   └── wilayah_indonesia.sql            # Data wilayah (optional)
+├── scripts/
+│   ├── build.bat                        # Build script
+│   └── run.bat                          # Run script
+├── lib/
+│   └── mysql-connector-j-8.4.0.jar      # JDBC driver
+├── pom.xml                              # Maven configuration
+└── README.md                            # Dokumentasi ini
 ```
 
 ### Technology Stack
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   Java Swing UI (AWT/Swing)        â”‚
-â”‚   (LoginFrame, MainFrame, Panels)  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-               â”‚
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   Business Logic Layer              â”‚
-â”‚   (LayananAkademik, Validasi, etc) â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-               â”‚
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   Database Abstraction              â”‚
-â”‚   (BasisData, JDBC Connection)     â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-               â”‚
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   MySQL/MariaDB Database            â”‚
-â”‚   (uts_pbo2 Schema)                â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+┌─────────────────────────────────────┐
+│   Java Swing UI (AWT/Swing)        │
+│   (LoginFrame, MainFrame, Panels)  │
+└──────────────┬──────────────────────┘
+               │
+┌──────────────▼──────────────────────┐
+│   Business Logic Layer              │
+│   (LayananAkademik, Validasi, etc) │
+└──────────────┬──────────────────────┘
+               │
+┌──────────────▼──────────────────────┐
+│   Database Abstraction              │
+│   (BasisData, JDBC Connection)     │
+└──────────────┬──────────────────────┘
+               │
+┌──────────────▼──────────────────────┐
+│   MySQL/MariaDB Database            │
+│   (uts_pbo2 Schema)                │
+└─────────────────────────────────────┘
 ```
 
 ---
 
-## âœ… Validasi & Business Rules
+## ✅ Validasi & Business Rules
 
 ### Validasi Input
-- ðŸ“ **NIM**: Wajib 5 digit angka
-- ðŸ‘¥ **Prodi**: Hanya `Teknik Informatika`, `Teknik Industri`, `DKV`, `RETAIL`
-- ðŸ·ï¸ **Kode Kelas**: Otomatis mengikuti prodi (TIF, TI, DKV, RETAIL)
-- ðŸ“… **Format Tahun**: Popup kalender untuk pilih angkatan
-- ðŸ”’ **Status Mahasiswa**: Otomatis AKTIF saat tambah data
-- ðŸ“ **Password**: Terenkripsi dengan secure hashing
-- âœ… **Error Messages**:
+- 📏 **NIM**: Wajib 5 digit angka
+- 👥 **Prodi**: Hanya `Teknik Informatika`, `Teknik Industri`, `DKV`, `RETAIL`
+- 🏷️ **Kode Kelas**: Otomatis mengikuti prodi (TIF, TI, DKV, RETAIL)
+- 📅 **Format Tahun**: Popup kalender untuk pilih angkatan
+- 🔒 **Status Mahasiswa**: Otomatis AKTIF saat tambah data
+- 📝 **Password**: Terenkripsi dengan secure hashing
+- ✅ **Error Messages**:
   - "Maaf minimal input angka adalah 5." (NIM < 5 digit)
   - "Maaf data tersebut tidak ada." (NIM valid tapi tidak ditemukan)
 
 ### Business Logic
-- ðŸ” Pencarian mahasiswa **hanya** berdasarkan NIM
-- ðŸ”„ Tombol `Kembali` di Master Mahasiswa untuk reset tampilan semua data
-- ðŸ“ Format kelas detail: `TIF 25A CID`, `DKV 24C`, `TI 21F`
-- ðŸ“Š Konversi nilai: A(4.0), B(3.0), C(2.0), D(1.0), E(0.0)
-- ðŸŽ“ IP = rata-rata nilai semester berlaku
-- ðŸ“ˆ IPK = rata-rata nilai kumulatif dari semua semester
-- ðŸ”„ **KRS Mengulang**: Otomatis ditandai jika mahasiswa pernah ambil mata kuliah yang sama
+- 🔍 Pencarian mahasiswa **hanya** berdasarkan NIM
+- 🔄 Tombol `Kembali` di Master Mahasiswa untuk reset tampilan semua data
+- 📝 Format kelas detail: `TIF 25A CID`, `DKV 24C`, `TI 21F`
+- 📊 Konversi nilai: A(4.0), B(3.0), C(2.0), D(1.0), E(0.0)
+- 🎓 IP = rata-rata nilai semester berlaku
+- 📈 IPK = rata-rata nilai kumulatif dari semua semester
+- 🔄 **KRS Mengulang**: Otomatis ditandai jika mahasiswa pernah ambil mata kuliah yang sama
 
 ### Advanced Features
-- ðŸ’° **UKT Integration**: KRS otomatis disetujui jika UKT semester lunas
-- ðŸ‘¨â€ðŸ« **Approval Workflow**: ACC dosen wali + dosen prodi
-- ðŸ“‹ **Semester Filter**: Master Mata Kuliah auto-filter saat semester dipilih
-- ðŸ“¦ **Bulk Enroll**: Tambah paket KRS otomatis memasukkan 8 mata kuliah sesuai semester
-- ðŸ“Š **KRS Table Divided**: Tiga section - Mahasiswa/KRS, Mata Kuliah/Dosen, Mengulang/UKT/ACC
+- 💰 **UKT Integration**: KRS otomatis disetujui jika UKT semester lunas
+- 👨‍🏫 **Approval Workflow**: ACC dosen wali + dosen prodi
+- 📋 **Semester Filter**: Master Mata Kuliah auto-filter saat semester dipilih
+- 📦 **Bulk Enroll**: Tambah paket KRS otomatis memasukkan 8 mata kuliah sesuai semester
+- 📊 **KRS Table Divided**: Tiga section - Mahasiswa/KRS, Mata Kuliah/Dosen, Mengulang/UKT/ACC
 
 ### Data Integrity
-- âœ… Primary Key: Mencegah duplikasi
-- âœ… Unique Key: Validasi unikitas kolom penting
-- âœ… Validasi Aplikasi: Double-check di layer business logic
-- âœ… View IPK: Snapshot dari KRS + Nilai tanpa duplikasi
+- ✅ Primary Key: Mencegah duplikasi
+- ✅ Unique Key: Validasi unikitas kolom penting
+- ✅ Validasi Aplikasi: Double-check di layer business logic
+- ✅ View IPK: Snapshot dari KRS + Nilai tanpa duplikasi
 
 ---
 
-## ðŸ“Š Data Seed & Statistik
+## 📊 Data Seed & Statistik
 
 **Bawaan Database (siap pakai):**
-- ðŸ‘¥ **24 Mahasiswa** - Bervariasi dengan UKT lunas/belum lunas
-- ðŸ‘¨â€ðŸ« **16 Dosen** - Sebagai pengampu dan wali kelas
-- ðŸ“š **64 Mata Kuliah** - 8 per semester (semester 1-8)
-- 4ï¸âƒ£ **4 Program Studi** - TIF, TI, DKV, RETAIL
-- ðŸ“‹ **199 Data KRS** - Termasuk data mengulang
-- ðŸŽ“ **199 Nilai** - Sesuai dengan KRS
-- ðŸ’³ **48 Pembayaran UKT** - Bervariasi lunas/belum
+- 👥 **24 Mahasiswa** - Bervariasi dengan UKT lunas/belum lunas
+- 👨‍🏫 **16 Dosen** - Sebagai pengampu dan wali kelas
+- 📚 **64 Mata Kuliah** - 8 per semester (semester 1-8)
+- 4️⃣ **4 Program Studi** - TIF, TI, DKV, RETAIL
+- 📋 **199 Data KRS** - Termasuk data mengulang
+- 🎓 **199 Nilai** - Sesuai dengan KRS
+- 💳 **48 Pembayaran UKT** - Bervariasi lunas/belum
 
 ---
 
-## ðŸ”§ Troubleshooting
+## 🔧 Troubleshooting
 
 | Masalah | Solusi |
 |---------|--------|
@@ -497,13 +494,13 @@ matakuliah_semester_8=8
 
 ---
 
-## ðŸ“ž Support & Kontribusi
+## 📞 Support & Kontribusi
 
 Untuk laporan bug atau saran fitur, silakan buat issue atau hubungi tim development.
 
 ---
 
-## ðŸ“„ Lisensi
+## 📄 Lisensi
 
 Project ini dikembangkan sebagai tugas **UTS PBO2** dengan referensi pada best practices enterprise Java applications.
 
