@@ -90,15 +90,6 @@ public class KrsPanel extends JPanel {
         gbc.gridy = y++;
         panel.add(addButton, gbc);
 
-        JPanel note = new JPanel(new GridLayout(0, 1, 0, 4));
-        note.setOpaque(false);
-        note.add(Theme.muted("Validasi: semester 1-8."));
-        note.add(Theme.muted("UKT lunas otomatis ACC oleh Dosen Wali atau Kaprodi."));
-        note.add(Theme.muted("MK mengulang diarahkan ke Kaprodi, bukan dua-duanya."));
-        note.add(Theme.muted("Tambah mata kuliah lewat daftar centang (minimal 8)."));
-        note.add(Theme.muted("Sistem menandai MK dan semester yang diulang."));
-        gbc.gridy = y;
-        panel.add(note, gbc);
         return panel;
     }
 

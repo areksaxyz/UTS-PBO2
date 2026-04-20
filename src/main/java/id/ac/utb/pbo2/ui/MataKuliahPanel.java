@@ -8,7 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public class MataKuliahPanel extends JPanel {
     private final LayananAkademik service = new LayananAkademik();
@@ -32,21 +34,39 @@ public class MataKuliahPanel extends JPanel {
     }
 
     private JPanel header() {
-        JPanel panel = new JPanel(new BorderLayout(12, 8));
+        JPanel panel = new JPanel(new BorderLayout(0, 10));
         panel.setOpaque(false);
-        JPanel title = new JPanel(new BorderLayout());
+        JPanel title = new JPanel(new BorderLayout(0, 4));
         title.setOpaque(false);
         title.add(Theme.title("Master Mata Kuliah"), BorderLayout.NORTH);
         title.add(noteLabel, BorderLayout.CENTER);
-        panel.add(title, BorderLayout.WEST);
+        panel.add(title, BorderLayout.NORTH);
 
-        JPanel filter = new JPanel(new GridLayout(1, 4, 8, 0));
+        JPanel filter = new JPanel(new GridBagLayout());
         filter.setOpaque(false);
-        filter.add(Theme.sectionTitle("Prodi"));
-        filter.add(prodiBox);
-        filter.add(Theme.sectionTitle("Semester"));
-        filter.add(semesterBox);
-        panel.add(filter, BorderLayout.EAST);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(0, 0, 0, 8);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        gbc.gridx = 0;
+        gbc.weightx = 0;
+        filter.add(Theme.sectionTitle("Prodi"), gbc);
+
+        gbc.gridx = 1;
+        gbc.weightx = 1;
+        filter.add(prodiBox, gbc);
+
+        gbc.gridx = 2;
+        gbc.weightx = 0;
+        filter.add(Theme.sectionTitle("Semester"), gbc);
+
+        gbc.gridx = 3;
+        gbc.weightx = 0;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        filter.add(semesterBox, gbc);
+
+        panel.add(filter, BorderLayout.CENTER);
         return panel;
     }
 

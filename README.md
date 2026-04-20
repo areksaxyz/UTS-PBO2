@@ -6,6 +6,50 @@
 [![Java Version](https://img.shields.io/badge/java-17+-orange)]()
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 
+## Cara Menjalankan
+
+### Prasyarat
+
+- JDK 17 atau lebih baru
+- MySQL/MariaDB berjalan di komputer lokal, misalnya melalui XAMPP
+- Database default menggunakan `localhost:3306`, user `root`, dan password kosong
+
+### Jalankan Aplikasi
+
+Buka terminal/PowerShell dari folder project, lalu jalankan:
+
+```powershell
+.\scripts\run.bat
+```
+
+Script tersebut akan melakukan build terlebih dahulu, kemudian menjalankan aplikasi desktop Java Swing.
+
+Jika hanya ingin melakukan build:
+
+```powershell
+.\scripts\build.bat
+```
+
+Saat pertama kali dijalankan, aplikasi akan membuat database `uts_pbo2`, tabel, dan data awal secara otomatis.
+
+### Login Awal
+
+```text
+Admin    : admin / admin123
+Operator : operator / operator123
+```
+
+Jika konfigurasi MySQL berbeda, atur environment variable sebelum menjalankan aplikasi:
+
+```powershell
+$env:DB_HOST="localhost"
+$env:DB_PORT="3306"
+$env:DB_NAME="uts_pbo2"
+$env:DB_USER="root"
+$env:DB_PASSWORD="password_mysql"
+.\scripts\run.bat
+```
+
 ## Fitur Utama
 
 - Autentikasi login berbasis role (Admin dan Operator)
